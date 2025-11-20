@@ -16,12 +16,14 @@ import {
 } from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import Link from "next/link";
+import { Eye, EyeOff, Lock } from "lucide-react";
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [togglePassword, setTogglePassword] = useState(false);
   const router = useRouter();
   const { login } = useAuth();
 
@@ -46,7 +48,7 @@ export default function LoginForm() {
     setIsLoading(true);
     try {
       await login(email, password);
-      router.push("/dashboard");
+      router.push("/");
     } catch (err) {
       setError(err instanceof Error ? err.message : "Login failed");
     } finally {
@@ -93,14 +95,34 @@ export default function LoginForm() {
               >
                 Password
               </label>
-              <Input
-                id="password"
-                type="password"
-                placeholder="••••••••"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                disabled={isLoading}
-              />
+              <div className="relative">
+                <Lock className="text-muted-foreground pointer-events-none absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2" />
+
+                <Input
+                  id="password"
+                  type={togglePassword ? "text" : "password"}
+                  placeholder="••••••••"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  disabled={isLoading}
+                  className="border-stroke-primary pr-10 pl-10"
+                />
+
+                <button
+                  type="button"
+                  onClick={() => setTogglePassword((prev) => !prev)}
+                  className="text-muted-foreground hover:text-foreground absolute top-1/2 right-3 -translate-y-1/2 transition-colors"
+                  aria-label={
+                    togglePassword ? "Hide password" : "Show password"
+                  }
+                >
+                  {!togglePassword ? (
+                    <EyeOff className="h-4 w-4" />
+                  ) : (
+                    <Eye className="h-4 w-4" />
+                  )}
+                </button>
+              </div>
             </div>
 
             <Button type="submit" className="w-full" disabled={isLoading}>

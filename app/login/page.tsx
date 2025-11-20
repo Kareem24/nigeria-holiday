@@ -3,9 +3,9 @@
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/auth-context";
-import RegisterForm from "@/components/register-form";
+import LoginForm from "@/components/login-form";
 
-export default function RegisterPage() {
+export default function LoginPage() {
   const router = useRouter();
   const { user, loading } = useAuth();
 
@@ -23,5 +23,5 @@ export default function RegisterPage() {
     );
   }
 
-  return <RegisterForm />;
+  return <LoginForm />;
 }

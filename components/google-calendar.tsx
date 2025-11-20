@@ -3,8 +3,8 @@ import React from "react";
 const NigeriaHoliday = () => {
   const calendarId = "en.ng%23holiday@group.v.calendar.google.com";
 
-  const startDate = "20251201";
-  const endDate = "20260101";
+  const startDate = "20231201";
+  const endDate = "20300101";
 
   const embedUrl = `https://calendar.google.com/calendar/embed?
     height=600
@@ -20,17 +20,15 @@ const NigeriaHoliday = () => {
     &showTabs=1
     &showCalendars=1
     &mode=month
-    &dates=${startDate}%2F${endDate}`; // <-- Added dates parameter
+    &dates=${startDate}%2F${endDate}`;
 
   return (
     <div style={{ padding: "20px", textAlign: "center" }}>
       <iframe
-        src={embedUrl.replace(/\s/g, "")} // Remove whitespace
+        src={embedUrl.replace(/\s/g, "")}
         style={{ border: 0 }}
         width="800"
         height="600"
-        frameBorder="0"
-        scrolling="no"
         title="Nigeria Public Holidays Calendar"
       ></iframe>
     </div>
