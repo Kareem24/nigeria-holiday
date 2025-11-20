@@ -25,14 +25,6 @@ export type PublicHolidaysResponse = PublicHoliday[];
 export default function DashboardPage() {
   const router = useRouter();
   const { user, loading, logout } = useAuth();
-  const [holidays, setHolidays] = useState<PublicHolidaysResponse>([]);
-
-  useEffect(() => {
-    const year = new Date().getFullYear();
-    fetch(`https://date.nager.at/api/v3/PublicHolidays/${year}/NG`)
-      .then((res) => res.json())
-      .then((data) => setHolidays(data));
-  }, []);
 
   useEffect(() => {
     if (!loading && !user) {
@@ -82,43 +74,6 @@ export default function DashboardPage() {
             Nigeria Public Holidays
           </h2>
           <NigeriaHolidays />
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* Google Calendar */}
-          {/* <Card className="lg:col-span-2 shadow-md">
-            <CardHeader>
-              <CardTitle>Google Calendar</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <iframe
-                src="https://calendar.google.com/calendar/embed?src=en.nigeria%23holiday%40group.v.calendar.google.com"
-                style={{ border: 0 }}
-                width="100%"
-                height="600"
-                frameBorder="0"
-                scrolling="no"
-              ></iframe>
-            </CardContent>
-          </Card> */}
-
-          {/* Holiday List */}
-          {/* <Card className="shadow-md">
-            <CardHeader>
-              <CardTitle>Nigeria Public Holidays</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4 max-h-[600px] overflow-y-auto">
-              {holidays.map((h) => (
-                <div
-                  key={h.date}
-                  className="p-3 border rounded-lg bg-gray-50 shadow-sm"
-                >
-                  <p className="font-semibold">{h.localName}</p>
-                  <p className="text-sm text-gray-600">{h.date}</p>
-                </div>
-              ))}
-            </CardContent>
-          </Card> */}
         </div>
       </div>
     </div>
